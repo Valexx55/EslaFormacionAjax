@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+window.onload = function () {
+	 
+   //alert ('Se ha cargado la página');
+    setInterval (mostrarOcultarFoto, 5000);
+}
+<!--aquí nuestro códidgo JavaScript, que aporta el dinamismo a la página y permite crear y manipular todos los elements. Bien debería ir aparte en un fichero con extensión .js, como hicimos el clase -->
+	var visible = false; //en principio, al cargar la página, la foto no está visible, con lo que inicio esta variable a falso, que usaremos a modo de interruptor, para controlar el estado lógico de la foto: visible o no. Como al principio no se va a ver, le damos el valor false.
+	var nveces = 0;
+	function mostrarOcultarFoto() {
+		
+		nveces = nveces + 1;
+		console.log ("num veces = " + nveces);
+		if (visible) //visible es true, vedadero. if (visible == true), también podríamos poner
+		{
+			console.log("La foto estaba visible. Hago que se tape");
+			//obtengo referencia al elemento que representa la imagen
+			var img = document.getElementById ("lafoto");
+			//obtengo referencia al elemento que representa la foto
+			var div_foto = document.getElementById ("divfoto");
+			//elimino del padre, el hijo seleccionado
+			div_foto.removeChild(img);
+			
+			visible = false;
+		} else //visible es igual false 
+		{
+			console.log("La foto estaba no visible. Hago que se vea");
+			//obtengo referencia al padre, div o punto de anclaje
+			var div_foto = document.getElementById ("divfoto");
+			//creo el elemento img y le asigno los atributos 
+			var nuevo_hijo = document.createElement ("IMG");
+			nuevo_hijo.id = "lafoto"; //detalle importante. Uso ese id y luego, usaré el mismo si quiero referenciar a la imangen
+			nuevo_hijo.src="p6.jpg";
+			//añado al padre, el hijo
+			div_foto.appendChild(nuevo_hijo);
+			//actualizo el estado de la variable de control
+			visible = true;
+		}
+	}
+	
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- defino el botón y detecto el evento onclick sobre él: programo el callback y el listener -->
+	<button onclick="mostrarOcultarFoto ()">MuestraOcultaFoto</button>
+	<!-- esta sección está vacía inicialmente. Sirve de ancla y en ella, se creara la imagen como un elemento / nodo hijo -->
+	<div id="divfoto">
+		<!-- Aquí irá la foto imporntante apreciar la estructura jerárquica de los elementos que constituyen la página-->
+	</div>
+</body>
+</html>

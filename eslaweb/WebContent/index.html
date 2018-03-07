@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//QUIERO QUE CUANDO EL USUARIO
+//LE DE AL BOTÓN, haga un saludo
+//con el nombre introducido en la caja
+//de texto
+function saludo()
+{
+	var input_nombre = document.getElementById("nombre");
+	var nombre_introducido = input_nombre.value;
+	var tipo = input_nombre.type;
+	console.log("Tipo = " +tipo);
+	alert ("HOLA " + nombre_introducido);
+}
+
+
+
+</script>
+<meta charset="ISO-8859-1">
+<title>ES LA FORMACION AJAX</title>
+</head>
+<body>
+BIENVENIDOS<br>
+<input type="text" size="10px" id="nombre">
+<input type="button" value="OK" onclick="saludo()">
+</body>
+</html>

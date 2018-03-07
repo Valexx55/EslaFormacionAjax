@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+	var x = new XMLHttpRequest();
+
+	function enviar() {
+		var nombrei = document.getElementById("nombre").value;
+		var edadi = document.getElementById("edad").value;
+		var persona = {
+			name : nombrei,
+			age : edadi
+		};
+
+		console.log("Edad " + persona.age);
+		console.log("Nombre " + persona.name);
+
+		var persona_json = JSON.stringify(persona);
+		var ser_reg = 'http://192.168.0.44:8080/eslaweb/RegistrarPersona';
+
+		console.log("PERSONA = " + persona_json);
+		x.onreadystatechange = haVuelto;
+		x.open('POST', ser_reg, true);
+		x.setRequestHeader('Content-Type', 'application/json');
+		x.send(persona_json);
+		console.log("Petición enviada");
+
+	}
+	function haVuelto() {
+		if (x.readyState == 4)
+
+		{
+			if (x.status == 200) {
+				console.log("Respuesta servidor completada");
+				var cuerpo_http = x.responseText;
+				console.log("Info recibida = " + cuerpo_http);
+				var persona = JSON.parse(cuerpo_http);
+				var n_persona = persona.name;
+				var edad2 = persona.age;
+				document.getElementById("nombrereves").value = n_persona;
+				document.getElementById("edadx2").value = edad2;
+
+			} else {
+				location = 'error.html';
+			}
+		} else {
+			console.log("Estado = " + x.readyState);
+		}
+	}
+</script>
+<meta charset="ISO-8859-1">
+<title>Enviar Persona</title>
+</head>
+<body>
+	Nombre:
+	<input type="text" id="nombre">
+	<br> Edad:
+	<input type="text" id="edad">
+	<br>
+	<br>
+	<button onclick="enviar()">ENVIAR</button>
+	<br>
+	<br> NombreReves:
+	<input type="text" id="nombrereves">
+	<br> Edadx2:
+	<input type="text" id="edadx2">
+	<br>
+
+</body>
+</html>
